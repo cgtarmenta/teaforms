@@ -22,19 +22,31 @@ const TABLE_NAME = process.env.DDB_TABLE || 'app_core'
 const GSI1_NAME = process.env.DDB_GSI1 || 'GSI1'
 const GSI2_NAME = process.env.DDB_GSI2 || 'GSI2'
 const AWS_REGION = process.env.AWS_REGION || 'eu-west-2'
+const IS_LOCAL = process.env.LOCAL_DEVELOPMENT === 'true'
+const DDB_ENDPOINT = process.env.DDB_ENDPOINT
 
 // Initialize DynamoDB client
-const client = new DynamoDBClient({ 
-  region: AWS_REGION,
-  // Use credentials from environment or IAM role
-  ...(process.env.AWS_ACCESS_KEY_ID && {
-    credentials: {
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-      sessionToken: process.env.AWS_SESSION_TOKEN
-    }
-  })
-})
+const clientConfig: any = {
+  region: AWS_REGION === 'local' ? 'eu-west-2' : AWS_REGION,
+}
+
+// For local development, use DynamoDB Local
+if (IS_LOCAL || DDB_ENDPOINT) {
+  clientConfig.endpoint = DDB_ENDPOINT || 'http://localhost:8000'
+  clientConfig.credentials = {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || 'test',
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || 'test'
+  }
+} else if (process.env.AWS_ACCESS_KEY_ID) {
+  // Use credentials from environment
+  clientConfig.credentials = {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+    sessionToken: process.env.AWS_SESSION_TOKEN
+  }
+}
+
+const client = new DynamoDBClient(clientConfig)
 
 // Create document client with marshalling options
 export const ddbClient = DynamoDBDocumentClient.from(client, {
