@@ -305,7 +305,7 @@
     "@smithy/util-utf8" "^4.1.0"
     tslib "^2.6.2"
 
-"@aws-sdk/client-dynamodb@^3.893.0":
+"@aws-sdk/client-dynamodb@^3.782.0", "@aws-sdk/client-dynamodb@^3.893.0":
   version "3.893.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/client-dynamodb/-/client-dynamodb-3.893.0.tgz#ce700c1fe0eb9c617889bc3cac384572abe420b8"
   integrity sha512-rojJDqmrpzwVfcE+EZ1Q1dnSWhHZQYwk9GinsvvnQNDCrARMyH+Q24jSLXk9rKSiY9UUj0P5o3kH2RdCOS3rGw==
@@ -1186,7 +1186,7 @@
     "@smithy/types" "^4.5.0"
     tslib "^2.6.2"
 
-"@aws-sdk/util-dynamodb@3.893.0":
+"@aws-sdk/util-dynamodb@3.893.0", "@aws-sdk/util-dynamodb@^3.782.0":
   version "3.893.0"
   resolved "https://registry.yarnpkg.com/@aws-sdk/util-dynamodb/-/util-dynamodb-3.893.0.tgz#9049f27b0e48498ae936862e78c303787af8491f"
   integrity sha512-zjXv6ejXF2bzSB+EEmfATm1VoyejJmncNYunOLQ+ThiSepfLQ5jKYtbDc7niqjfHysGpVTSYji4DG25Yj+WQZA==
@@ -4211,6 +4211,23 @@ dunder-proto@^1.0.1:
     es-errors "^1.3.0"
     gopd "^1.2.0"
 
+dynamoose-utils@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/dynamoose-utils/-/dynamoose-utils-4.0.4.tgz#ffb089ec66a9120c02fad9fb50a99a307e3e9ef0"
+  integrity sha512-iRKIAIJvJcqEi7huT6p/yxARwvV/aqpYh27YZsPEEv9+ynbvmez2ySl+khOrLPYmkwIOuxPIPAJyKCncfBnI9A==
+  dependencies:
+    js-object-utilities "^2.2.1"
+
+dynamoose@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/dynamoose/-/dynamoose-4.0.4.tgz#a5225717b53f2efe1600d4dd76995133ad84cab1"
+  integrity sha512-J4O5QkQKpi+JTHOggLliVFwz97CCYqWmgrSAoJP1gZSnVhdHk7W6awEddMGvZN4zGnKXn837+3tQS2JDfCmm6g==
+  dependencies:
+    "@aws-sdk/client-dynamodb" "^3.782.0"
+    "@aws-sdk/util-dynamodb" "^3.782.0"
+    dynamoose-utils "^4.0.4"
+    js-object-utilities "^2.2.1"
+
 eastasianwidth@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/eastasianwidth/-/eastasianwidth-0.2.0.tgz#696ce2ec0aa0e6ea93a397ffcf24aa7840c827cb"
@@ -5072,6 +5089,11 @@ js-cookie@^3.0.5:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-3.0.5.tgz#0b7e2fd0c01552c58ba86e0841f94dc2557dcdbc"
   integrity sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==
+
+js-object-utilities@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/js-object-utilities/-/js-object-utilities-2.2.1.tgz#8c8b65bced78d4cfe598781f52ec63f17e15d2c9"
+  integrity sha512-0Ki0uXeMEga6OVM7ESxLjSaCYMdrQ46av0VomzaQT7BWNwMsEodmrtImkdD6K7SCq0ADw1uoQm4HBrsMQqtEww==
 
 js-tokens@^4.0.0:
   version "4.0.0"
