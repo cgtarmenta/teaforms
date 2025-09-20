@@ -1,9 +1,9 @@
 import type { Express } from 'express'
-import { authenticate, authorize } from '../../auth.js'
-import { localLogin, localLogout } from '../../auth-local.js'
-import { setupFormRoutes } from './forms.js'
-import { setupEpisodeRoutes } from './episodes.js'
-import { setupUserRoutes } from './users.js'
+import { authenticate, authorize } from '../../auth'
+import { localLogin, localLogout } from '../../auth-local'
+import { setupFormRoutes } from './forms'
+import { setupEpisodeRoutes } from './episodes'
+import { setupUserRoutes } from './users'
 
 const IS_LOCAL = process.env.LOCAL_DEVELOPMENT === 'true'
 
@@ -32,7 +32,11 @@ export async function setupApiRoutes(app: Express) {
   setupUserRoutes(app)
 
   // 404 handler for API routes
-  app.use('/api/*', (req, res) => {
-    res.status(404).json({ error: 'API endpoint not found' })
+  app.use((req, res, next) => {
+    if (req.path.startsWith('/api/')) {
+      res.status(404).json({ error: 'API endpoint not found' })
+    } else {
+      next()
+    }
   })
 }

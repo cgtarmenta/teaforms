@@ -1,10 +1,10 @@
 import type { Express } from 'express'
-import { authenticate, authorize, createAuditLog, canAccess } from '../../auth.js'
-import { db, keys, gsiKeys } from '../../ddb.js'
+import { authenticate, authorize, createAuditLog, canAccess } from '../../auth'
+import { db, keys, gsiKeys } from '../../ddb'
 import { v4 as uuidv4 } from 'uuid'
 import { startOfDay, endOfDay, parseISO } from 'date-fns'
-import { exportToPDF } from '../../utils/pdf-export.js'
-import { exportToXML } from '../../utils/xml-export.js'
+// import { exportToPDF } from '../../utils/pdf-export'
+// import { exportToXML } from '../../utils/xml-export'
 
 export interface Episode {
   PK: string

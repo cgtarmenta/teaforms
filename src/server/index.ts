@@ -41,7 +41,7 @@ async function createServer() {
   })
 
   // API Routes
-  const { setupApiRoutes } = await import('./routes/api/index.js')
+  const { setupApiRoutes } = await import('./routes/api/index')
   await setupApiRoutes(app)
 
   // Health check endpoint
@@ -68,7 +68,7 @@ async function createServer() {
   }
 
   // SSR handler - should be last
-  app.get('*', async (req, res, next) => {
+  app.use(async (req, res, next) => {
     const pageContextInit = {
       urlOriginal: req.originalUrl,
       user: (req as any).user || null, // Will be populated by auth middleware

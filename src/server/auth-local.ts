@@ -5,8 +5,8 @@
 
 import jwt from 'jsonwebtoken'
 import type { Request, Response, NextFunction } from 'express'
-import { db, keys } from './ddb.js'
-import type { AuthUser, UserProfile, UserRole } from './auth.js'
+import { db, keys } from './ddb'
+import type { AuthUser, UserProfile, UserRole } from './auth'
 
 const JWT_SECRET = process.env.JWT_SECRET || 'local-dev-secret-change-in-production'
 const IS_LOCAL = process.env.LOCAL_DEVELOPMENT === 'true'

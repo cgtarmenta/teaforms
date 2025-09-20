@@ -1,6 +1,6 @@
 import type { Express } from 'express'
-import { authenticate, authorize, createAuditLog, type UserRole, type UserProfile } from '../../auth.js'
-import { db, keys } from '../../ddb.js'
+import { authenticate, authorize, createAuditLog, type UserRole, type UserProfile } from '../../auth'
+import { db, keys } from '../../ddb'
 import { 
   CognitoIdentityProviderClient,
   AdminCreateUserCommand,

@@ -1,6 +1,6 @@
 import type { Express } from 'express'
-import { authenticate, authorize, createAuditLog } from '../../auth.js'
-import { db, keys, EntityType } from '../../ddb.js'
+import { authenticate, authorize, createAuditLog } from '../../auth'
+import { db, keys, EntityType } from '../../ddb'
 import { v4 as uuidv4 } from 'uuid'
 
 export interface Form {

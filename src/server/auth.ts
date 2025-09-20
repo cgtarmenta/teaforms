@@ -1,6 +1,6 @@
 import { CognitoJwtVerifier } from 'aws-jwt-verify'
 import type { Request, Response, NextFunction } from 'express'
-import { db, keys } from './ddb.js'
+import { db, keys } from './ddb'
 
 // Types
 export type UserRole = 'sysadmin' | 'clinician' | 'teacher'
