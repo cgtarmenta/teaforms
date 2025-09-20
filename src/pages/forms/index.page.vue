@@ -202,11 +202,13 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
+import { usePageContext } from 'vite-plugin-ssr/client'
 import AppButton from '@/components/AppButton.vue'
 import AppInput from '@/components/AppInput.vue'
 import AppCard from '@/components/AppCard.vue'
 
 const router = useRouter()
+const pageContext = usePageContext()
 
 // Icons placeholder
 const PlusIcon = 'PlusIcon'
@@ -224,13 +226,25 @@ interface Form {
   createdBy: string
 }
 
-// State
-const forms = ref<Form[]>([])
-const loading = ref(true)
+// Props from server
+interface Props {
+  forms: Form[]
+  initialFilters?: {
+    status?: string
+    category?: string
+  }
+  error?: string
+}
+
+const props = defineProps<Props>()
+
+// State - initialized with server data
+const forms = ref<Form[]>(props.forms || [])
+const loading = ref(false) // Not loading initially since we have server data
 const filters = ref({
   search: '',
-  status: '',
-  category: ''
+  status: props.initialFilters?.status || '',
+  category: props.initialFilters?.category || ''
 })
 
 // Computed
@@ -258,17 +272,20 @@ const filteredForms = computed(() => {
 
 // Methods
 const fetchForms = async () => {
+  // In SSR, forms are loaded server-side
+  // This method can be used for client-side updates/refresh
   loading.value = true
   try {
-    const response = await fetch('/api/forms', {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    })
+    // Navigate with query params to trigger server-side data fetch
+    const params = new URLSearchParams()
+    if (filters.value.status) params.set('status', filters.value.status)
+    if (filters.value.category) params.set('category', filters.value.category)
     
-    if (response.ok) {
-      forms.value = await response.json()
-    }
+    const queryString = params.toString()
+    const url = queryString ? `/forms?${queryString}` : '/forms'
+    
+    // Use navigation for SSR data refresh
+    await router.push(url)
   } catch (error) {
     console.error('Error fetching forms:', error)
   } finally {
@@ -366,6 +383,10 @@ const getStatusLabel = (status: string) => {
 
 // Lifecycle
 onMounted(() => {
-  fetchForms()
+  // Forms are already loaded from server
+  // Only fetch if we don't have data (shouldn't happen in SSR)
+  if (!forms.value || forms.value.length === 0) {
+    console.log('No forms from server, checking for error:', props.error)
+  }
 })
 </script>
