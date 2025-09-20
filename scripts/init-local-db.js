@@ -5,6 +5,7 @@
  */
 
 import { DynamoDBClient, CreateTableCommand, ListTablesCommand } from '@aws-sdk/client-dynamodb'
+import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb'
 
 const IS_DOCKER = process.env.DOCKER_ENV === 'true'
 const ENDPOINT = process.env.DDB_ENDPOINT || (IS_DOCKER ? 'http://dynamodb:8000' : 'http://localhost:8000')
@@ -22,8 +23,14 @@ async function createTable() {
   const tableName = 'app_core'
   
   try {
-    // Check if table exists
-    const { TableNames } = await client.send(new ListTablesCommand({}))
+    console.log(`Connecting to DynamoDB at ${ENDPOINT}...`)
+    
+    // Check if table exists with timeout
+    const listCommand = new ListTablesCommand({})
+    const { TableNames } = await Promise.race([
+      client.send(listCommand),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Connection timeout')), 5000))
+    ])
     
     if (TableNames?.includes(tableName)) {
       console.log(`Table ${tableName} already exists`)
@@ -93,7 +100,6 @@ async function createTable() {
 }
 
 async function createInitialData() {
-  const { DynamoDBDocumentClient, PutCommand } = await import('@aws-sdk/lib-dynamodb')
   
   const docClient = DynamoDBDocumentClient.from(client)
   

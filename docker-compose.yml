@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Node.js SSR Application
   app:
@@ -28,7 +26,7 @@ services:
     depends_on:
       - dynamodb
       - redis
-      - localstack
+      # - localstack
     networks:
       - teaforms-network
     command: yarn dev:docker
@@ -41,7 +39,7 @@ services:
       - "8000:8000"
     volumes:
       - dynamodb-data:/data
-    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath /data"
+    command: "-jar DynamoDBLocal.jar -sharedDb -inMemory"
     networks:
       - teaforms-network
 
@@ -56,25 +54,25 @@ services:
     networks:
       - teaforms-network
 
-  # LocalStack for AWS services simulation
-  localstack:
-    image: localstack/localstack:latest
-    container_name: teaforms-localstack
-    ports:
-      - "4566:4566"
-      - "4571:4571"
-    environment:
-      - SERVICES=cognito-idp,s3,ses
-      - DEBUG=1
-      - DATA_DIR=/tmp/localstack/data
-      - LAMBDA_EXECUTOR=local
-      - HOSTNAME_EXTERNAL=localstack
-      - AWS_DEFAULT_REGION=eu-west-2
-    volumes:
-      - localstack-data:/tmp/localstack
-      - ./scripts/localstack:/docker-entrypoint-initaws.d
-    networks:
-      - teaforms-network
+  # LocalStack for AWS services simulation (disabled temporarily)
+  # localstack:
+  #   image: localstack/localstack:latest
+  #   container_name: teaforms-localstack
+  #   ports:
+  #     - "4566:4566"
+  #     - "4571:4571"
+  #   environment:
+  #     - SERVICES=cognito-idp,s3,ses
+  #     - DEBUG=1
+  #     - DATA_DIR=/tmp/localstack/data
+  #     - LAMBDA_EXECUTOR=local
+  #     - HOSTNAME_EXTERNAL=localstack
+  #     - AWS_DEFAULT_REGION=eu-west-2
+  #   volumes:
+  #     - localstack-data:/tmp/localstack
+  #     - ./scripts/localstack:/docker-entrypoint-initaws.d
+  #   networks:
+  #     - teaforms-network
 
   # DynamoDB Admin UI (optional, for debugging)
   dynamodb-admin:

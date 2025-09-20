@@ -1,4 +1,5 @@
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb'
+import { fromIni } from '@aws-sdk/credential-providers'
 import { 
   DynamoDBDocumentClient,
   GetCommand,
@@ -30,13 +31,17 @@ const clientConfig: any = {
   region: AWS_REGION === 'local' ? 'eu-west-2' : AWS_REGION,
 }
 
-// For local development, use DynamoDB Local
-if (IS_LOCAL || DDB_ENDPOINT) {
-  clientConfig.endpoint = DDB_ENDPOINT || 'http://localhost:8000'
+// Configure credentials based on environment
+if (IS_LOCAL && DDB_ENDPOINT) {
+  // Local development with DynamoDB Local
+  clientConfig.endpoint = DDB_ENDPOINT
   clientConfig.credentials = {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID || 'test',
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || 'test'
+    accessKeyId: 'test',
+    secretAccessKey: 'test'
   }
+} else if (process.env.AWS_PROFILE) {
+  // Use AWS profile (e.g., cgtaa) for real DynamoDB
+  clientConfig.credentials = fromIni({ profile: process.env.AWS_PROFILE })
 } else if (process.env.AWS_ACCESS_KEY_ID) {
   // Use credentials from environment
   clientConfig.credentials = {
@@ -45,6 +50,7 @@ if (IS_LOCAL || DDB_ENDPOINT) {
     sessionToken: process.env.AWS_SESSION_TOKEN
   }
 }
+// If no credentials are specified, AWS SDK will use default credential chain
 
 const client = new DynamoDBClient(clientConfig)
 
