@@ -82,6 +82,12 @@ function extractToken(req: Request): string | null {
 
 // Verify JWT token
 export async function verifyToken(token: string): Promise<AuthUser | null> {
+  // For local development, use local auth
+  if (process.env.LOCAL_DEVELOPMENT === 'true') {
+    const { verifyLocalToken } = await import('./auth-local.js')
+    return verifyLocalToken(token)
+  }
+
   if (!jwtVerifier) {
     console.error('JWT verifier not initialized. Check Cognito configuration.')
     return null

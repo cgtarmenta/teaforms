@@ -1,8 +1,11 @@
 import type { Express } from 'express'
 import { authenticate, authorize } from '../../auth.js'
+import { localLogin, localLogout } from '../../auth-local.js'
 import { setupFormRoutes } from './forms.js'
 import { setupEpisodeRoutes } from './episodes.js'
 import { setupUserRoutes } from './users.js'
+
+const IS_LOCAL = process.env.LOCAL_DEVELOPMENT === 'true'
 
 export async function setupApiRoutes(app: Express) {
   // Health check
@@ -13,6 +16,15 @@ export async function setupApiRoutes(app: Express) {
       authenticated: !!req.user 
     })
   })
+
+  // Auth routes for local development
+  if (IS_LOCAL) {
+    app.post('/api/auth/login/local', localLogin)
+    app.post('/api/auth/logout', localLogout)
+    app.get('/api/auth/me', authenticate, (req, res) => {
+      res.json({ user: req.user })
+    })
+  }
 
   // Setup route modules
   setupFormRoutes(app)

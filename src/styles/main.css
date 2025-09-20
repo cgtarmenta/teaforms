@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS variables for theming */
+@layer base {
+  :root {
+    --color-primary: theme('colors.primary.600');
+    --color-secondary: theme('colors.secondary.600');
+    --radius: 0.375rem;
+  }
+  
+  .dark {
+    --color-primary: theme('colors.primary.400');
+    --color-secondary: theme('colors.secondary.400');
+  }
+}
+
+/* Mobile-first utilities */
+@layer utilities {
+  /* Minimum touch target size for accessibility */
+  .touch-target {
+    @apply min-h-touch min-w-touch;
+  }
+  
+  /* Safe area padding for mobile devices */
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-left {
+    padding-left: env(safe-area-inset-left);
+  }
+  
+  .safe-right {
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Component styles */
+@layer components {
+  /* Button base styles */
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 
+           font-medium rounded-md transition-colors
+           focus:outline-none focus:ring-2 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed
+           touch-target;
+  }
+  
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 
+           focus:ring-primary-500;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-secondary-600 text-white hover:bg-secondary-700 
+           focus:ring-secondary-500;
+  }
+  
+  .btn-outline {
+    @apply btn border-2 border-gray-300 text-gray-700 
+           hover:bg-gray-50 focus:ring-gray-500;
+  }
+  
+  /* Form input styles */
+  .form-input {
+    @apply block w-full px-3 py-2 
+           border border-gray-300 rounded-md shadow-sm
+           placeholder-gray-400
+           focus:outline-none focus:ring-primary-500 focus:border-primary-500
+           disabled:bg-gray-100 disabled:cursor-not-allowed;
+  }
+  
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+  
+  .form-error {
+    @apply mt-1 text-sm text-red-600;
+  }
+  
+  /* Card styles */
+  .card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden;
+  }
+  
+  .card-body {
+    @apply p-4 sm:p-6;
+  }
+  
+  /* Mobile navigation */
+  .mobile-nav {
+    @apply fixed bottom-0 left-0 right-0 bg-white border-t 
+           safe-bottom z-40;
+  }
+}
+
+/* Accessibility improvements */
+@layer utilities {
+  /* Skip to content link */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:absolute focus:top-4 
+           focus:left-4 focus:z-50 focus:px-4 focus:py-2 
+           focus:bg-primary-600 focus:text-white focus:rounded-md;
+  }
+  
+  /* Focus visible utilities */
+  .focus-visible-ring {
+    @apply focus-visible:ring-2 focus-visible:ring-primary-500 
+           focus-visible:ring-offset-2;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-break {
+    page-break-before: always;
+  }
+}
