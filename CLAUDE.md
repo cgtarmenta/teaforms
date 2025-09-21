@@ -71,7 +71,7 @@ This document is the single source of truth for agents to create the project fro
 
 ## 5) System Architecture
 
-- **Web (SSR)**: Vue 3 + TS + `vite-plugin-ssr` hosted on **Amplify Hosting (SSR)** (Node runtime on Lambda@Edge or regional Lambda depending on Amplify setting).
+- **Web (SSR)**: Vue 3 + TS + Vike hosted on **Amplify Hosting (SSR)** (Node runtime on Lambda@Edge or regional Lambda depending on Amplify setting).
 - **Auth**: AWS Cognito (Amplify Auth), with custom user attributes `custom:role`.
 - **API**: Server routes inside SSR server (Node) backed by SDK access to DynamoDB; optional API Gateway + Lambda for pure APIs if needed.
 - **DB**: DynamoDB (single-table pattern recommended).
@@ -525,6 +525,71 @@ doppler run -- yarn dev
 [/_*]     -> block direct asset traversal if needed
 [/**]     -> SSR renderer
 ```
+
+---
+
+## 24) CRITICAL LESSONS LEARNED - DO NOT REPEAT THESE ERRORS
+
+### Package Manager
+- **ALWAYS USE YARN**, not npm. The project uses yarn.lock
+- When installing packages: `yarn add` not `npm install`
+- For dev dependencies: `yarn add -D <package>`
+- Build commands: `yarn build` not `npm run build`
+- This is an SSR project, no extra api or lambda functions needed
+- USE Aws DynamoDB as db and dynamoose as ODM
+- Add the variables to doppler, no try to mix doppler with .env files
+
+### Dependency Management
+- **DO NOT** switch between package managers (npm/yarn) - it breaks dependencies
+- **DO NOT** delete yarn.lock unless absolutely necessary
+- When dependencies disappear, check NODE_ENV - use `NODE_ENV=development yarn install` for dev dependencies
+- Always commit yarn.lock after successful installations
+
+### SSR Framework Choice
+- **USE Vike - it's stable and works
+
+### Build Process
+- Fix missing devDependencies BEFORE trying to build
+- Required devDependencies that may be missing:
+  - `@vitejs/plugin-vue`
+  - `@vitejs/plugin-vue-jsx`
+  - `@vue/tsconfig`
+  - `@tailwindcss/postcss` (for Tailwind v4)
+
+### Vite Configuration
+- Keep vite.config.ts simple - don't overcomplicate
+- Path aliases: Use array format for Vite 5+ to avoid deprecation warnings
+- Don't remove vite from dependencies thinking it comes from vite-plugin-ssr
+
+### AWS Amplify SSR
+- Amplify SSR needs a specific entry point format
+- Don't try to use experimental features without testing locally first
+- Keep amplify.yml build commands simple and use yarn
+
+### Git Management
+- Use `git status` before making changes
+- Use `git restore .` to revert tracked files
+- Clean untracked files with `rm -rf <files>`
+- Always verify working directory is clean before major changes
+
+### Testing Compilation
+- Test build locally before pushing: `yarn build`
+- If build fails, check for:
+  1. Missing dependencies
+  2. Import errors
+  3. TypeScript config issues
+  4. PostCSS/Tailwind configuration
+
+### Error Recovery
+- When in doubt, restore from git and start fresh
+- Don't try to fix cascading errors - address root cause
+- Keep changes atomic and test after each change
+
+### Project Structure
+- Don't change framework structure without understanding implications
+- Keep SSR pages in src/pages with .page.vue extension
+- Server code goes in src/server/
+- Don't mix client-only code in SSR pages
 
 ---
 
