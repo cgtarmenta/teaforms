@@ -12,7 +12,7 @@ applications:
             - yarn build
       artifacts:
         # SSR compute: upload entire repo including dist and server.js
-        baseDirectory: .
+        baseDirectory: dist
         files:
           - "**/*"
       cache:
