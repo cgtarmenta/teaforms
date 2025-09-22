@@ -11,7 +11,8 @@ applications:
           commands:
             - yarn build
       artifacts:
-        baseDirectory: dist/client
+        # SSR compute: upload entire repo including dist and server.js
+        baseDirectory: .
         files:
           - "**/*"
       cache:

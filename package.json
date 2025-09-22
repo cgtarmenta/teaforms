@@ -10,6 +10,7 @@
     "build:server": "vite build --ssr src/server.ts --outDir dist/server",
     "build:ssr": "yarn build",
     "preview": "cross-env NODE_ENV=production node server",
+    "start": "node server",
     "typecheck": "vue-tsc --noEmit",
     "dev:doppler": "doppler run -- node server",
     "preview:doppler": "cross-env NODE_ENV=production doppler run -- node server",
