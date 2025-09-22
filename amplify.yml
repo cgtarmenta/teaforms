@@ -1,17 +1,17 @@
 version: 1
 applications:
-  - appRoot: /
+  - appRoot: .
     frontend:
       phases:
         preBuild:
           commands:
             - npm i -g yarn
-            - yarn --frozen-lockfile
+            - yarn install --frozen-lockfile
         build:
           commands:
-            - npx doppler run --command "yarn build"
+            - yarn build
       artifacts:
-        baseDirectory: dist/server
+        baseDirectory: dist/client
         files:
           - "**/*"
       cache:
@@ -22,4 +22,3 @@ applications:
         headers:
           - key: Strict-Transport-Security
             value: max-age=63072000; includeSubDomains; preload
-
