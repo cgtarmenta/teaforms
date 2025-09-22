@@ -3,7 +3,6 @@
 
 ### ⚠️ CRITICAL RULES - READ FIRST
 1. **ALWAYS USE YARN** - Never use npm
-2. **USE VIKE** - Not vite-plugin-ssr (old version)
 3. **VITE + VUE 3 + TYPESCRIPT + TAILWIND 4**
 4. **TEST EACH STEP** - Verify success before proceeding
 5. **COMMIT AFTER MAJOR MILESTONES**
@@ -35,7 +34,6 @@
 ### Step 1.3: Install Core Dependencies
 ```bash
 [ ] yarn install
-[ ] yarn add vike
 [ ] yarn add vue-router@4 pinia
 ```
 
@@ -49,17 +47,16 @@
 ### CHECKPOINT 1
 ```bash
 [ ] yarn build  # Should complete without errors
-[ ] git add -A && git commit -m "feat: initialize project with Vite + Vue 3 + TS + Vike"
+[ ] git add -A && git commit -m "feat: initialize project with Vite + Vue 3 + TS + SSR"
 ```
 
 ---
 
-## PHASE 2: Configure Vike SSR
-### Step 2.1: Create Vike Configuration
+## PHASE 2: Configure SSR
+### Step 2.1: Create Configuration
 ```typescript
 # Create vite.config.ts
-[ ] Create file with proper Vike plugin configuration
-    - Import vike/plugin
+[ ] Create file with proper plugin configuration
     - Configure Vue plugin
     - Set up path aliases
 ```
@@ -67,7 +64,6 @@
 ### Step 2.2: Create Pages Structure
 ```
 [ ] mkdir -p src/pages
-[ ] Create src/pages/+config.ts  # Vike global config
 [ ] Create src/pages/+Layout.vue  # Root layout
 [ ] Create src/pages/index/+Page.vue  # Home page
 ```
@@ -82,7 +78,7 @@
 ```bash
 [ ] yarn dev  # Should start dev server
 [ ] curl http://localhost:3000  # Should return HTML
-[ ] git commit -am "feat: configure Vike SSR"
+[ ] git commit
 ```
 
 ---
@@ -443,12 +439,6 @@ DDB_TABLE=app_core
 rm -rf node_modules yarn.lock
 yarn cache clean
 yarn install
-```
-
-### Issue: Vike not working
-```bash
-# Ensure using correct import:
-import vikePlugin from 'vike/plugin'  # NOT vite-plugin-ssr
 ```
 
 ### Issue: Tailwind v4 not processing

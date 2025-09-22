@@ -1,0 +1,6 @@
+project: teaforms
+config: dev
+setup:
+  fallback:
+    project: teaforms
+    config: dev

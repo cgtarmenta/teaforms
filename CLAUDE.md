@@ -1,15 +1,15 @@
 
 # CALUDE.md (Context And Launch Unified Description & Execution)
 
-> **Project**: Behavioral Episode Registry (mobile‑first)  
-> **Purpose**: Clinically useful capture of self‑control/behavioral episodes in school settings for a child with ASD Level 1.  
+> **Project**: Behavioral Episode Registry (mobile‑first)
+> **Purpose**: Clinically useful capture of self‑control/behavioral episodes in school settings for a child with ASD Level 1.
 > **Target**: Teachers input observations; clinician designs forms and reviews/export data; sysadmin governs users and audits.
 
 ---
 
 ## 1) Executive Summary
 
-This document is the single source of truth for agents to create the project from scratch. It specifies scope, roles, architecture, data model, security, deployment (AWS Amplify), configuration (Doppler), and testing (Vue Test Utils + Vitest). The app is **mobile‑first**, **SSR with Vite + vite‑plugin‑ssr**, uses **Vue 3 + TS + Tailwind v4**, **AWS DynamoDB** as the database, **Cognito (via Amplify Auth)** for auth, and **Doppler** for secure secrets. Exports to **PDF/XML** are included.
+This document is the single source of truth for agents to create the project from scratch. It specifies scope, roles, architecture, data model, security, deployment (AWS Amplify), configuration (Doppler), and testing (Vue Test Utils + Vitest). The app is **mobile‑first**, **SSR with Vite **, uses **Vue 3 + TS + Tailwind v4**, **AWS DynamoDB** as the database, **Cognito (via Amplify Auth)** for auth, and **Doppler** for secure secrets. Exports to **PDF/XML** are included.
 
 ---
 
@@ -542,11 +542,7 @@ doppler run -- yarn dev
 ### Dependency Management
 - **DO NOT** switch between package managers (npm/yarn) - it breaks dependencies
 - **DO NOT** delete yarn.lock unless absolutely necessary
-- When dependencies disappear, check NODE_ENV - use `NODE_ENV=development yarn install` for dev dependencies
 - Always commit yarn.lock after successful installations
-
-### SSR Framework Choice
-- **USE Vike - it's stable and works
 
 ### Build Process
 - Fix missing devDependencies BEFORE trying to build

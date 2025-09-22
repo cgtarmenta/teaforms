@@ -1,0 +1,25 @@
+version: 1
+applications:
+  - appRoot: /
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm i -g yarn
+            - yarn --frozen-lockfile
+        build:
+          commands:
+            - npx doppler run --command "yarn build"
+      artifacts:
+        baseDirectory: dist/server
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
+    customHeaders:
+      - pattern: "**/*"
+        headers:
+          - key: Strict-Transport-Security
+            value: max-age=63072000; includeSubDomains; preload
+
