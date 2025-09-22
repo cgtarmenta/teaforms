@@ -31,7 +31,7 @@ const resolve = (p) => path.resolve(__dirname, p)
 let templateHtml = ''
 if (isProduction) {
   // Read the client HTML produced by `vite build`
-  templateHtml = await fs.readFile(resolve('dist/client/index.html'), 'utf-8')
+  templateHtml = await fs.readFile(resolve('dist/index.html'), 'utf-8')
 }
 
 const app = express()
@@ -59,8 +59,8 @@ if (!isProduction) {
   const compression = (await import('compression')).default
   const sirv = (await import('sirv')).default
   app.use(compression())
-  // IMPORTANT: serve the folder dist/client, not a single file
-  app.use(base, sirv(resolve('dist/client'), { extensions: [] }))
+  // Serve the folder dist (client assets)
+  app.use(base, sirv(resolve('dist'), { extensions: [] }))
 }
 
 // Lightweight API routes (non-blocking healthcheck)
@@ -105,14 +105,14 @@ app.use('*', async (req, res) => {
       // Import the prebuilt SSR bundle. Try ESM (.mjs) then CJS (.js)
       let mod
       try {
-      const entryMjs = pathToFileURL(resolve('dist/server/server.mjs')).href
-      mod = await import(entryMjs)
-    } catch (e) {
-      const entryJs = pathToFileURL(resolve('dist/server/server.js')).href
-      mod = await import(entryJs)
+        const entryMjs = pathToFileURL(resolve('dist/server.mjs')).href
+        mod = await import(entryMjs)
+      } catch (e) {
+        const entryJs = pathToFileURL(resolve('dist/server.js')).href
+        mod = await import(entryJs)
+      }
+      render = mod.render || mod.default?.render
     }
-    render = mod.render || mod.default?.render
-  }
 
     // Extract user session for SSR routing/initial state
     const rawCookie = req.headers.cookie || ''

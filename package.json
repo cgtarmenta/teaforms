@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "node server",
-    "build": "yarn run build:client && yarn run build:server",
-    "build:client": "vite build --outDir dist/client",
-    "build:server": "vite build --ssr src/server.ts --outDir dist/server",
+    "clean": "rm -rf dist",
+    "build": "yarn run clean && yarn run build:client && yarn run build:server",
+    "build:client": "vite build --outDir dist",
+    "build:server": "vite build --ssr src/server.ts --outDir dist",
     "build:ssr": "yarn build",
     "preview": "cross-env NODE_ENV=production node server",
     "start": "node server",

@@ -10,8 +10,8 @@ export default defineConfig({
     noExternal: [],
   },
   build: {
-    // Client build output
-    outDir: 'dist/client',
-    emptyOutDir: false, // we build client and server separately
+    // Output both client and SSR builds into the same folder `dist/`
+    outDir: 'dist',
+    emptyOutDir: false, // do not clear on SSR build; we clear once manually before client build
   },
 })
