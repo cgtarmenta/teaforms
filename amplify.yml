@@ -11,7 +11,9 @@ applications:
           commands:
             - yarn build
       artifacts:
+<<<<<<< HEAD
         # Upload built app (client + SSR bundle) into dist/
+>>>>>>> b858517d16f80acaa62e93f8727c0e62e2a628c4
         baseDirectory: dist
         files:
           - "**/*"
