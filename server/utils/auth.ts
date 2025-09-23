@@ -7,7 +7,8 @@ type User = { email: string; role: 'teacher'|'clinician'|'sysadmin' }
 function getSecret() {
   const cfg = useRuntimeConfig()
   const prod = process.env.NODE_ENV === 'production'
-  return cfg.SESSION_SECRET || (prod ? '' : 'dev-insecure-secret')
+  const envSecret = process.env.SESSION_SECRET || process.env.NUXT_SESSION_SECRET
+  return cfg.SESSION_SECRET || envSecret || (prod ? '' : 'dev-insecure-secret')
 }
 
 export function getUser(event: H3Event): User|null {
@@ -39,4 +40,3 @@ export function requireRole(user: User|null, roles: string[]) {
   if (!user) return false
   return roles.includes(user.role)
 }
-
