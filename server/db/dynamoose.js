@@ -6,7 +6,7 @@ function truthy(val) {
 }
 
 export async function configureDynamoose() {
-  const region = process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION || 'us-east-1'
+  const region = process.env.APP_AWS_REGION || process.env.NUXT_AWS_REGION || process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION || 'us-east-1'
   const endpoint = process.env.DDB_ENDPOINT || process.env.DYNAMODB_ENDPOINT
 
   if (endpoint) {

@@ -2,7 +2,7 @@
 import { DynamoDBClient, CreateTableCommand, DescribeTableCommand, UpdateTableCommand } from '@aws-sdk/client-dynamodb'
 
 const tableName = process.env.DDB_TABLE || 'app_core'
-const region = process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION || 'us-east-1'
+const region = process.env.APP_AWS_REGION || process.env.NUXT_AWS_REGION || process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION || 'us-east-1'
 const client = new DynamoDBClient({ region })
 
 async function ensureTable() {
@@ -57,4 +57,3 @@ ensureTable().catch((e) => {
   console.error('[ddb] Error:', e)
   process.exit(1)
 })
-

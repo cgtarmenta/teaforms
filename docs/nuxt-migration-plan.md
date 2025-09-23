@@ -28,7 +28,7 @@
 - Add Nuxt route middleware for `requiresAuth` + `roles`.
 - Remove Express/Vite SSR from root; promote `nuxt/` to repo root.
 - Amplify: use Nuxt build output (`.output/public` + `.output/server`); update `amplify.yml` accordingly (appRoot now repo root).
-- Env vars in Amplify branch: `AWS_REGION`, `DDB_TABLE`, `DATA_BACKEND=ddb` (or `USE_DYNAMODB=true`), `SESSION_SECRET`, `BASE=/`.
+- Env vars in Amplify branch: `DDB_TABLE`, `DATA_BACKEND=ddb` (or `USE_DYNAMODB=true`), `SESSION_SECRET`, `BASE=/`. Do not set `AWS_*` variables (reserved in Amplify). The runtime region is provided implicitly; if you need to override it, set `APP_AWS_REGION`.
 
 5) PR5 — Validation & polish
 - PDF table gridlines & wrapping, admin pages i18n, episodes pagination/sorting.
