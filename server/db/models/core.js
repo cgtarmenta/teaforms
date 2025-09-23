@@ -1,7 +1,7 @@
 import dynamoose from '../dynamoose.js'
 
 export function getCoreModel() {
-  const tableName = process.env.DDB_TABLE || 'app_core'
+  const tableName = process.env.DDB_TABLE || process.env.NUXT_DDB_TABLE || 'app_core'
   const schema = new dynamoose.Schema(
     {
       PK: { type: String, hashKey: true },
@@ -33,4 +33,3 @@ export function getCoreModel() {
 
   return dynamoose.model(tableName, schema)
 }
-

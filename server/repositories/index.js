@@ -16,8 +16,8 @@ let cached
 
 export function getRepos() {
   if (cached) return cached
-  const sel = String(process.env.DATA_BACKEND || '').toLowerCase()
-  const flag = String(process.env.USE_DYNAMODB || '').toLowerCase()
+  const sel = String(process.env.DATA_BACKEND || process.env.NUXT_DATA_BACKEND || '').toLowerCase()
+  const flag = String(process.env.USE_DYNAMODB || process.env.NUXT_USE_DYNAMODB || '').toLowerCase()
   const useDdb = sel === 'ddb' || sel === 'dynamodb' || flag === '1' || flag === 'true' || flag === 'yes'
   cached = {
     backend: 'memory',
