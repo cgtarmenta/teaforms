@@ -7,6 +7,16 @@ applications:
         preBuild:
           commands:
             - npm i -g yarn
+            - |
+              if [ -n "$DOPPLER_TOKEN" ]; then \
+                echo "Installing Doppler CLI..."; \
+                curl -Ls https://cli.doppler.com/install.sh | sh; \
+                doppler --version; \
+                echo "Downloading secrets from Doppler..."; \
+                doppler secrets download --no-file --format env --token "$DOPPLER_TOKEN" > .env; \
+              else \
+                echo "DOPPLER_TOKEN not set; skipping Doppler"; \
+              fi
             - yarn config set network-timeout 600000
             - |
               echo "Installing deps with retry..."
@@ -16,6 +26,11 @@ applications:
         build:
           commands:
             - yarn build
+            - |
+              if [ -f .env ]; then \
+                echo "Packaging .env with server output for runtime"; \
+                cp .env .output/server/.env || true; \
+              fi
       artifacts:
         baseDirectory: .output/public
         files:
