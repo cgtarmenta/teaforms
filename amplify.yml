@@ -18,3 +18,15 @@ applications:
       cache:
         paths:
           - node_modules/**/*
+    backend:
+      phases:
+        build:
+          commands:
+            - echo "Nuxt SSR server bundle deploy"
+      artifacts:
+        baseDirectory: .output/server
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
