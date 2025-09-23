@@ -1,5 +1,10 @@
-# Vue 3 + TypeScript + Vite
+# TeaForms — Nuxt 3 SSR
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Production-ready Nuxt 3 app with mobile-first UI, i18n (default ES), and DynamoDB persistence. Deployed on AWS Amplify using Nuxt SSR output.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+- Dev: `yarn dev`
+- Build: `yarn build` → `.output/`
+- Start: `yarn start` (Node server from `.output/server`)
+- Bootstrap DynamoDB (optional): `yarn bootstrap:ddb`
+
+Amplify uses `appRoot: .` (see `amplify.yml`). Environment variables are sourced from Amplify branch settings (no Doppler in prod). See `docs/nuxt-migration-plan.md` and `docs/PR5.md` for context.

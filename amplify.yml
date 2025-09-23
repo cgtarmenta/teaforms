@@ -2,6 +2,7 @@ version: 1
 applications:
   - appRoot: .
     frontend:
+      framework: nuxt
       phases:
         preBuild:
           commands:
@@ -11,15 +12,9 @@ applications:
           commands:
             - yarn build
       artifacts:
-        # Upload built app (client + SSR bundle) into dist/
-        baseDirectory: dist
+        baseDirectory: .output/public
         files:
           - "**/*"
       cache:
         paths:
           - node_modules/**/*
-    customHeaders:
-      - pattern: "**/*"
-        headers:
-          - key: Strict-Transport-Security
-            value: max-age=63072000; includeSubDomains; preload

@@ -1,0 +1,45 @@
+{
+  "nav": { "home": "Home", "login": "Login", "lang": "Language", "episodes": "Episodes", "forms": "Forms", "users": "Users", "analytics": "Analytics", "logout": "Logout" },
+  "login": { "title": "Login", "email": "Email", "password": "Password", "role": "Role", "signIn": "Sign in", "signingIn": "Signing in…" },
+  "roles": { "teacher": "Teacher", "clinician": "Clinician", "sysadmin": "SysAdmin" },
+  "forms": { "title": "Forms", "newTitlePh": "New form title", "add": "Add", "status": "status", "version": "v", "edit": "Edit", "raw": "raw" },
+  "formBuilder": { "title": "Form Builder", "addField": "Add Field", "label": "Label", "type": "Type", "required": "Required", "options": "Options (comma separated)", "def": "Default", "fields": "Fields", "edit": "Edit", "remove": "Delete", "up": "Up", "down": "Down", "none": "No fields yet." },
+  "episodes": { "title": "Episodes", "form": "Form", "context": "Context", "quickCreate": "Quick Create", "openBuilder": "Open Builder", "sort": "Sort by", "order": "Order", "asc": "Ascending", "desc": "Descending", "sortTimestamp": "Date", "sortForm": "Form", "sortContext": "Context", "sortAuthor": "Author" },
+  "contexts": { "class": "Class", "recess": "Recess", "lunch": "Lunch", "hall": "Hall", "other": "Other" },
+  "export": { "pdf": "Export PDF", "xml": "Export XML", "from": "From", "to": "To", "filter": "Filter" },
+  "episodesNew": { "title": "New Episode", "create": "Create Episode", "noFields": "No fields defined for this form." },
+  "common": { "yes": "Yes", "no": "No", "forbidden": "You do not have permission to view this page.", "raw": "raw" },
+  "commonExtra": { "view": "View", "by": "by" },
+  "episodesExtra": { "singular": "Episode" },
+  "admin": {
+    "title": "Administration",
+    "users": "Users",
+    "analytics": "Analytics",
+    "addUser": "Add user",
+    "email": "Email",
+    "role": "Role",
+    "active": "Active",
+    "create": "Create",
+    "save": "Save",
+    "delete": "Delete",
+    "confirmDelete": "Delete user?",
+    "stats": "Statistics",
+    "totalEpisodes": "Total episodes",
+    "byForm": "By form",
+    "byContext": "By context"
+  },
+  "landing": {
+    "title": "Behavioral Episode Registry",
+    "subtitle": "Mobile capture, clinical review, and secure export.",
+    "ctaLogin": "Sign in",
+    "cards": {
+      "fast": "Fast & SSR",
+      "fastDesc": "SSR + light hydration for instant responses.",
+      "secure": "Secure by design",
+      "secureDesc": "JWT sessions, RBAC, controlled exports.",
+      "mobile": "Mobile-first",
+      "mobileDesc": "Comfortable 44px touch targets and friendly inputs."
+    }
+  }
+}
+

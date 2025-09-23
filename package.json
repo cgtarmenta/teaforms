@@ -1,45 +1,22 @@
 {
   "name": "teaforms",
   "private": true,
-  "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "node server",
-    "clean": "rm -rf dist",
-    "build": "yarn run clean && yarn run build:client && yarn run build:server",
-    "build:client": "vite build --outDir dist",
-    "build:server": "vite build --ssr src/server.ts --outDir dist",
-    "build:ssr": "yarn build",
-    "preview": "cross-env NODE_ENV=production node server",
-    "start": "node server",
-    "typecheck": "vue-tsc --noEmit",
-    "dev:doppler": "doppler run -- node server",
-    "preview:doppler": "cross-env NODE_ENV=production doppler run -- node server",
-    "bootstrap:ddb": "cross-env AWS_SDK_LOAD_CONFIG=1 node scripts/bootstrap-ddb.mjs"
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "start": "node .output/server/index.mjs",
+    "bootstrap:ddb": "node scripts/bootstrap-ddb.mjs"
   },
   "dependencies": {
-    "compression": "^1.8.1",
+    "nuxt": "^3.13.0",
+    "vue-i18n": "^9.14.0",
     "dynamoose": "^4.0.4",
-    "express": "^4.17.1",
     "jsonwebtoken": "^9.0.2",
     "pdf-lib": "^1.17.1",
-    "sirv": "^3.0.2",
-    "vue": "^3.5.21",
-    "vue-i18n": "^11.1.12",
-    "vue-router": "^4.5.1",
     "xmlbuilder2": "^3.1.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "4.1.13",
-    "@vitejs/plugin-vue": "^6.0.1",
-    "@vue/tsconfig": "^0.8.1",
-    "autoprefixer": "^10.4.21",
-    "cross-env": "^10.0.0",
-    "postcss": "^8.5.6",
-    "tailwindcss": "4.1.13",
-    "typescript": "~5.9.2",
-    "vite": "^7.1.6",
-    "vite-tsconfig-paths": "^5.1.4",
-    "vue-tsc": "^3.0.7"
+    "@nuxtjs/tailwindcss": "^6.12.0"
   }
 }

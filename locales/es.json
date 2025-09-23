@@ -1,0 +1,45 @@
+{
+  "nav": { "home": "Inicio", "login": "Entrar", "lang": "Idioma", "episodes": "Episodios", "forms": "Formularios", "users": "Usuarios", "analytics": "Analítica", "logout": "Salir" },
+  "login": { "title": "Acceso", "email": "Correo", "password": "Contraseña", "role": "Rol", "signIn": "Entrar", "signingIn": "Entrando…" },
+  "roles": { "teacher": "Docente", "clinician": "Clínico", "sysadmin": "Administrador" },
+  "forms": { "title": "Formularios", "newTitlePh": "Título del nuevo formulario", "add": "Añadir", "status": "estado", "version": "v", "edit": "Editar", "raw": "bruto" },
+  "formBuilder": { "title": "Constructor de formulario", "addField": "Añadir campo", "label": "Etiqueta", "type": "Tipo", "required": "Requerido", "options": "Opciones (separadas por comas)", "def": "Predeterminado", "fields": "Campos", "edit": "Editar", "remove": "Eliminar", "up": "Subir", "down": "Bajar", "none": "Sin campos todavía." },
+  "episodes": { "title": "Episodios", "form": "Formulario", "context": "Contexto", "quickCreate": "Creación rápida", "openBuilder": "Abrir constructor", "sort": "Ordenar por", "order": "Orden", "asc": "Ascendente", "desc": "Descendente", "sortTimestamp": "Fecha", "sortForm": "Formulario", "sortContext": "Contexto", "sortAuthor": "Autor" },
+  "contexts": { "class": "Clase", "recess": "Recreo", "lunch": "Comedor", "hall": "Pasillo", "other": "Otro" },
+  "export": { "pdf": "Exportar PDF", "xml": "Exportar XML", "from": "Desde", "to": "Hasta", "filter": "Filtrar" },
+  "episodesNew": { "title": "Nuevo episodio", "create": "Crear episodio", "noFields": "No hay campos definidos para este formulario." },
+  "common": { "yes": "Sí", "no": "No", "forbidden": "No tienes permiso para ver esta página.", "raw": "bruto" },
+  "commonExtra": { "view": "Ver", "by": "por" },
+  "episodesExtra": { "singular": "Episodio" },
+  "admin": {
+    "title": "Administración",
+    "users": "Usuarios",
+    "analytics": "Analítica",
+    "addUser": "Añadir usuario",
+    "email": "Correo",
+    "role": "Rol",
+    "active": "Activo",
+    "create": "Crear",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "confirmDelete": "¿Eliminar usuario?",
+    "stats": "Estadísticas",
+    "totalEpisodes": "Total de episodios",
+    "byForm": "Por formulario",
+    "byContext": "Por contexto"
+  },
+  "landing": {
+    "title": "Registro de episodios conductuales",
+    "subtitle": "Captura móvil, revisión clínica y exportación segura.",
+    "ctaLogin": "Entrar",
+    "cards": {
+      "fast": "Rápido y SSR",
+      "fastDesc": "SSR + hidratación ligera para respuestas inmediatas.",
+      "secure": "Seguro por diseño",
+      "secureDesc": "Sesiones JWT, RBAC, exportación controlada.",
+      "mobile": "Móvil primero",
+      "mobileDesc": "Objetivos táctiles de 44px e inputs cómodos."
+    }
+  }
+}
+

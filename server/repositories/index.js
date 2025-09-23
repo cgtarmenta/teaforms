@@ -31,6 +31,12 @@ export function getRepos() {
       ...cached,
       backend: 'ddb',
       ensure: async () => {
+        try {
+          const { configureDynamoose } = await import('../db/dynamoose.js')
+          await configureDynamoose()
+        } catch (e) {
+          console.warn('[repos] Failed to configure Dynamoose:', e?.message || e)
+        }
         const ddbRepos = await loadDdbRepos()
         if (ddbRepos) cached = { ...ddbRepos, ensure: async () => {} }
         return cached
